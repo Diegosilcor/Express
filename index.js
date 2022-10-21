@@ -1,28 +1,35 @@
 
 
 
-// Routing
+// HTTP y Methods
 
 const express = require('express')
+
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello world')
+// Envia peticion GET por defecto las URL
+app.get('/products', (req, res) => {
+  res.send('lista de productos')
+  // Validate date
+  // Query a database
+  // Process data
+
 })
 
-app.get('/about', (req, res) => {
-  res.send('About')
+app.put('/products', (req, res) => {
+  res.send('actualizando producto')
 })
 
-app.get('/weather', (req, res) => {
-  res.send('The current weather is nice')
+app.post('/products', (req, res) => {
+  res.send('creando productos')
 })
 
-// Crear una ruta que no importa que ruta visite, siempre quiero que responda lo mismo
-// USE
+app.delete('/products', (req, res) => {
+  res.send('eliminando productos')
+})
 
-app.use((req, res) => {
-  res.status(404).send('No se encontro tu pagina')
+app.patch('/products', (req, res) => {
+  res.send('actualizando una parte del producto')
 })
 
 app.listen(3000)
