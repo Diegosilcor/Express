@@ -1,23 +1,28 @@
-// Con Node.js
-// const http = require('http')
-// const fs = require('fs')
-
-// const server = http.createServer((req, res) => {
-//   const read = fs.createReadStream('./static/index.html')
-//   read.pipe(res);
-// });
-
-// server.listen(3000)
-// console.log(`Server on port ${3000}`);
 
 
-// Con Express
+
+// Routing
+
 const express = require('express')
 const app = express()
+
 app.get('/', (req, res) => {
-  res.sendFile('./static/index.html', {
-    root: __dirname
-  })
+  res.send('Hello world')
+})
+
+app.get('/about', (req, res) => {
+  res.send('About')
+})
+
+app.get('/weather', (req, res) => {
+  res.send('The current weather is nice')
+})
+
+// Crear una ruta que no importa que ruta visite, siempre quiero que responda lo mismo
+// USE
+
+app.use((req, res) => {
+  res.status(404).send('No se encontro tu pagina')
 })
 
 app.listen(3000)
