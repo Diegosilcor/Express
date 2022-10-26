@@ -1,37 +1,41 @@
 
 
 
-// HTTP y Methods
+// HTTP Response
 
 const express = require('express')
 
 const app = express()
 
-// Envia peticion GET por defecto las URL
-app.get('/products', (req, res) => {
-  res.send('lista de productos')
-  // Validate date
-  // Query a database
-  // Process data
-
+app.get('/', (req, res) => {
+  res.send('Hello world')
 })
 
-app.put('/products', (req, res) => {
-  res.send('actualizando producto')
+app.get('/miArchivo', (req, res) => {
+  res.sendFile('./javascript.png', {
+    root: __dirname
+  })
 })
 
-app.post('/products', (req, res) => {
-  res.send('creando productos')
+
+app.get('/user', (req, res) => {
+  res.json({
+    "name": "Diego",
+    "lastname": "Silva Cordoba",
+    age: 32,
+    points: [1, 2, 3],
+    addres: {
+      city: "Madrid",
+      street: "Duque 20"
+    }
+  })
 })
 
-app.delete('/products', (req, res) => {
-  res.send('eliminando productos')
-})
+app.get('/isAlive', (req, res) => {
+  res.sendStatus(200)
+});
 
-app.patch('/products', (req, res) => {
-  res.send('actualizando una parte del producto')
-})
+app.listen(3000);
 
-app.listen(3000)
-console.log(`Server on port ${3000}`);
+console.log(`Server on port${3000}`);
 
