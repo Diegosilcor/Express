@@ -1,39 +1,19 @@
 
-
-
-// HTTP Response
+// Request Body
+// El cliente nos va enviar datos
 
 const express = require('express')
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello world')
+app.use(express.text())
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+app.post('/user', (req, res) => {
+  console.log(req.body);
+  res.send('Nuevo usuario creado')
 })
-
-app.get('/miArchivo', (req, res) => {
-  res.sendFile('./javascript.png', {
-    root: __dirname
-  })
-})
-
-
-app.get('/user', (req, res) => {
-  res.json({
-    "name": "Diego",
-    "lastname": "Silva Cordoba",
-    age: 32,
-    points: [1, 2, 3],
-    addres: {
-      city: "Madrid",
-      street: "Duque 20"
-    }
-  })
-})
-
-app.get('/isAlive', (req, res) => {
-  res.sendStatus(200)
-});
 
 app.listen(3000);
 
